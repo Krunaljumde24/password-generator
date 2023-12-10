@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import './App.css'
 
 function App() {
@@ -7,6 +7,8 @@ function App() {
   const [length, setLength] = useState(8)
   const [allowNumbers, setAllowNumbers] = useState(false)
   const [allowCharacters, setAllowCharacters] = useState(false)
+
+  const passwordRef = useRef(null)
 
   let generatePassword = useCallback(() => {
     let str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -30,6 +32,12 @@ function App() {
 
   useEffect(generatePassword, [length, allowNumbers, allowCharacters])
 
+  let copyToClipboard = () => {
+    passwordRef.current.select();
+    let value = passwordRef.current.value;
+    window.navigator.clipboard.writeText(value)
+  }
+
   return (
     <>
       <div className='main-container'>
@@ -41,6 +49,7 @@ function App() {
               className="form-control"
               name='password'
               value={password}
+              ref={passwordRef}
               onChange={(event) => {
                 setPassword(event.target.value)
               }}
@@ -49,7 +58,9 @@ function App() {
           <div className='col'>
             <button
               type='button'
-              className='btn btn-primary'>
+              className='btn btn-primary'
+              onClick={copyToClipboard}
+            >
               Copy
             </button>
           </div>
