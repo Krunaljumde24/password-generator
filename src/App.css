@@ -1,0 +1,22 @@
+body{
+  background-color: #AFC8AD;
+}
+
+.main-container{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  background-color: cadetblue;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.second {
+   margin: 10px;
+   font-size: 20px;
+}
+
+input{
+  margin-left: 10px;
+}
